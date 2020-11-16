@@ -154,16 +154,4 @@ vue框架的实现
 {
 
 }
-vue学习源码的时候学习到的知识点
-createDocumentFragment() 方法
-{
-    createdocumentfragment()方法创建了一虚拟的节点对象，节点对象包含所有属性和方法。
-    当你想提取文档的一部分，改变，增加，或删除某些内容及插入到文档末尾可以使用createDocumentFragment() 方法。
-    你也可以使用文档的文档对象来执行这些变化，但要防止文件结构被破坏，createDocumentFragment() 方法可以更安全改变文档的结构及节点。
-}
-nodeType 属性
-{
-    如果节点是元素节点，则 nodeType 属性将返回 1。
-    如果节点是属性节点，则 nodeType 属性将返回 2。
-}
 # Test
