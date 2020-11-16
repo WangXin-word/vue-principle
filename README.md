@@ -20,7 +20,6 @@ vue框架的实现
         如果没有显式指定构造方法，则会添加默认的 constructor 方法。
         如果不指定一个构造函数(constructor)方法, 则使用一个默认的构造函数(constructor)。
     }
-
     2.实现一个数据观察者
     {
         querySelector() 方法:querySelector() 方法返回文档中匹配指定 CSS 选择器的一个元素。
@@ -33,7 +32,6 @@ vue框架的实现
                 当你想提取文档的一部分，改变，增加，或删除某些内容及插入到文档末尾可以使用createDocumentFragment() 方法。
                 你也可以使用文档的文档对象来执行这些变化，但要防止文件结构被破坏，createDocumentFragment() 方法可以更安全改变文档的结构及节点。
             }
-
         appendChild() 方法
             {
                 appendChild() 方法向节点添加最后一个子节点。
@@ -135,21 +133,21 @@ vue框架的实现
     }
 }
 
-
-
-
 (2)实现一个数据监听器Observer
 {
 
 }
+
 (3)实现一个watcher去更新视图
 {
 
 }
+
 （4）实现一个proxy
 {
 
 }
+
 （5）面试题
 {
 
