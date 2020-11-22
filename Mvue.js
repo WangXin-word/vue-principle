@@ -10,11 +10,25 @@ const compileUtil = {
         },vm.$data)
         
     },
+    setVal(expr,vm,inputVal){
+        return expr.split('.').reduce((data,currentVal) =>{
+            data[currentVal] = inputVal
+        },vm.$data)
+    },
+    getContentVal(expr,vm){
+        return expr.replace(/\{\{(.+?)\}\}/g,(...args)=>{
+            return this.getVal(args[1],vm);
+        })
+    },
 
     text(node,expr,vm){  //expr:msg
         let value;
         if(expr.indexOf('{{') !== -1){
             value = expr.replace(/\{\{(.+?)\}\}/g,(...args)=>{
+                // 绑定观察者，将来数据发生变化 触发这里的回调 进行更新
+                new Watcher(vm,args[1],()=>{
+                    this.updater.textUpdater(node,this.getContentVal(expr,vm));
+                })
                 return this.getVal(args[1],vm);
             })
         }else{
@@ -23,11 +37,25 @@ const compileUtil = {
         this.updater.textUpdater(node,value)
     },
     html(node,expr,vm){
-        const value = this.getVal(expr,vm);
+        let value = this.getVal(expr,vm);
+        new Watcher(vm,expr,(newVal)=>{
+            console.log(newVal)
+            this.updater.htmlUpdater(node,newVal)
+        })
         this.updater.htmlUpdater(node,value)
     },
     model(node,expr,vm){
         const value = this.getVal(expr,vm)
+        // 绑定更新函数 数据驱动视图
+        new Watcher(vm,expr,(newVal)=>{
+            console.log(newVal)
+            this.updater.modelUpdater(node,newVal)
+        })
+        // 视图影响数据数据在更新视图
+        node.addEventListener('input',(e)=>{
+            // 设置值
+            this.setVal(expr,vm,e.target.value)
+        })
         this.updater.modelUpdater(node,value)
     },
     on(node,expr,vm,eventName){
@@ -154,9 +182,23 @@ class MVue{
         // console.log(this.$el)
         if(this.$el){
             //1.实现一个数据观察者
+            new Observer(this.$data) 
             //2.实现一个指令解析器
             new Compile(this.$el,this)
+            // 实现一个代理
+            this.proxyDate(this.$data)
         }
-
+    }
+    proxyDate(data){
+        for(const key in data){
+            Object.defineProperty(this,key,{
+                get(){
+                    return data[key];
+                },
+                set(newVal){
+                    data[key] = newVal;
+                }
+            })
+        }
     }
 }

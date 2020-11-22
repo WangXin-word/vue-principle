@@ -21,6 +21,7 @@
         <input type="text" v-model = 'msg'>
         <button v-on:click = "handlerClick">点我</button>
     </div>
+    <script src="./Observer.js"></script>
     <script src="./Mvue.js"></script>
     <script>
         let vm = new MVue({
@@ -37,6 +38,8 @@
             methods:{
                 handlerClick(){
                     console.log(this)
+                    // this.$data.person.name = '学习MVVM'
+                    this.person.name = '学习MVVM'
                 }
             }
         })
