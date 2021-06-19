@@ -1,3 +1,13 @@
+/*
+ * @Author: 汪鑫
+ * @Date: 2021-06-19 15:20:33
+ * @Annotate: 输入这页的内容
+ * @LastEditTime: 2021-06-19 15:52:44
+ * @LastEditors: 汪鑫
+ * @Description: 
+ * @FilePath: /vue-principle/Observer.js
+ * 可以输入预定的版权声明、个性签名、空行等
+ */
  class Watcher{
      constructor(vm,expr,cb){
          this.vm = vm
